@@ -1,0 +1,39 @@
+services:
+  web:
+    hostname: web
+    container_name: web
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./lululemon:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=${DEBUG:-False}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD:-lululemon}
+      - DATABASE_USER=${DATABASE_USER:-lululemon}
+      - DATABASE_NAME=${DATABASE_NAME:-lululemon}
+      - DATABASE_HOST=db
+      - DATABASE_PORT=${DATABASE_PORT:-5432}
+      - ALLOWED_HOSTS=${ALLOWED_HOSTS:-localhost}
+    depends_on:
+      - db
+
+
+  db:
+    image: postgres:13
+    hostname: db
+    container_name: db
+    volumes:
+      - .docker/postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=lululemon
+      - POSTGRES_USER=lululemon
+      - POSTGRES_PASSWORD=lululemon
+    ports:
+      - "5432:5432"
+
+
+volumes:
+  postgres_data:
