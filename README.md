@@ -48,7 +48,7 @@ docker-compose up -d --build
  - Swagger documentation is available at: http://127.0.0.1:8000/swagger/
  - ReDoc documentation is available at: http://127.0.0.1:8000/redoc/
 
-### Running Django locally
+### Run Django locally
 
 1. Clone the repository:
 
